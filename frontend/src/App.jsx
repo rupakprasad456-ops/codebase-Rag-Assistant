@@ -6,6 +6,8 @@ import { ChunkExplorer } from './components/ChunkExplorer';
 import { SettingsModal } from './components/SettingsModal';
 import { CodeViewerModal } from './components/CodeViewerModal';
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('chat');
   const [status, setStatus] = useState(null);
@@ -13,7 +15,7 @@ export default function App() {
   const [selectedCitation, setSelectedCitation] = useState(null);
 
   const fetchStatus = () => {
-    fetch('/api/status')
+    fetch(`${API_BASE}/api/status`)
       .then((res) => res.json())
       .then((data) => setStatus(data))
       .catch((e) => console.error('Failed to fetch backend status:', e));

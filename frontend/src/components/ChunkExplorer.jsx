@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Database, Search, Code, Eye, Hash, Tag, FileText } from 'lucide-react';
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export const ChunkExplorer = ({ onOpenCitation }) => {
   const [chunks, setChunks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -14,7 +16,7 @@ export const ChunkExplorer = ({ onOpenCitation }) => {
     if (search) params.append('search', search);
     if (language) params.append('language', language);
 
-    fetch(`/api/chunks?${params.toString()}`)
+    fetch(`${API_BASE}/api/chunks?${params.toString()}`)
       .then((res) => res.json())
       .then((data) => {
         setChunks(data.chunks || []);

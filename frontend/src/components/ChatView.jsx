@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Send, Bot, User, Sparkles, FileText, Clock, HelpCircle, Zap, Shield, CreditCard } from 'lucide-react';
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export const ChatView = ({ onOpenCitation, config }) => {
   const [messages, setMessages] = useState([
     {
@@ -36,7 +38,7 @@ Ask me anything about your repository architecture, specific functions, security
     if (!textToSend) setInput('');
     setLoading(true);
 
-    fetch('/api/query', {
+    fetch(`${API_BASE}/api/query`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ query: queryText, top_k: 5 }),

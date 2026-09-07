@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { X, FileCode, Check, Copy } from 'lucide-react';
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export const CodeViewerModal = ({ filePath, lineStart, lineEnd, onClose }) => {
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(true);
@@ -12,7 +14,7 @@ export const CodeViewerModal = ({ filePath, lineStart, lineEnd, onClose }) => {
     setLoading(true);
     setError(null);
 
-    fetch(`/api/file-content?path=${encodeURIComponent(filePath)}`)
+    fetch(`${API_BASE}/api/file-content?path=${encodeURIComponent(filePath)}`)
       .then((res) => {
         if (!res.ok) throw new Error(`Failed to load file (${res.status})`);
         return res.json();

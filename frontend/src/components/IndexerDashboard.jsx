@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FolderPlus, Play, UploadCloud, FileCode, CheckCircle, RefreshCw, Layers, ShieldCheck } from 'lucide-react';
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export const IndexerDashboard = ({ status, onIndexSuccess }) => {
   const [dirPath, setDirPath] = useState('');
   const [loading, setLoading] = useState(false);
@@ -14,7 +16,7 @@ export const IndexerDashboard = ({ status, onIndexSuccess }) => {
     setMsg(null);
     setErr(null);
 
-    fetch('/api/index-sample', { method: 'POST' })
+    fetch(`${API_BASE}/api/index-sample`, { method: 'POST' })
       .then((res) => res.json())
       .then((data) => {
         setMsg(data.message);
@@ -31,7 +33,7 @@ export const IndexerDashboard = ({ status, onIndexSuccess }) => {
     setMsg(null);
     setErr(null);
 
-    fetch('/api/index-path', {
+    fetch(`${API_BASE}/api/index-path`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ directory_path: dirPath }),
@@ -59,7 +61,7 @@ export const IndexerDashboard = ({ status, onIndexSuccess }) => {
     const formData = new FormData();
     formData.append('file', file);
 
-    fetch('/api/upload-zip', {
+    fetch(`${API_BASE}/api/upload-zip`, {
       method: 'POST',
       body: formData,
     })

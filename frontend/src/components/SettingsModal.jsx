@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { X, Sliders, Cpu, Key, Layers, Save } from 'lucide-react';
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+
 export const SettingsModal = ({ config, onSave, onClose }) => {
   const [provider, setProvider] = useState(config.provider || 'offline');
   const [apiKey, setApiKey] = useState(config.api_key || '');
@@ -13,7 +15,7 @@ export const SettingsModal = ({ config, onSave, onClose }) => {
     e.preventDefault();
     setSaving(true);
 
-    fetch('/api/settings', {
+    fetch(`${API_BASE}/api/settings`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
