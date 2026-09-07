@@ -3,9 +3,12 @@ RAG Engine and LLM Provider Router
 Synthesizes retrieved code chunks into structured, citation-backed answers using Cloud LLMs or Offline Code Engine.
 """
 import os
+import sys
 import time
 import requests
 from typing import List, Dict, Any, Tuple, Optional
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from vector_store import vector_db, CodeChunk
 
 class RAGEngine:

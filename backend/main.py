@@ -192,9 +192,12 @@ def update_settings(req: SettingsRequest):
 # Auto-index sample codebase on startup if empty
 @app.on_event("startup")
 def startup_event():
-    if os.path.exists(SAMPLE_CODEBASE_DIR):
-        print("Auto-indexing sample codebase on server startup...")
-        _index_directory_internal(SAMPLE_CODEBASE_DIR)
+    try:
+        if os.path.exists(SAMPLE_CODEBASE_DIR):
+            print("Auto-indexing sample codebase on server startup...")
+            _index_directory_internal(SAMPLE_CODEBASE_DIR)
+    except Exception as e:
+        print(f"Warning: Startup auto-indexing encountered error (safe fallback): {e}")
 
 if __name__ == "__main__":
     import uvicorn

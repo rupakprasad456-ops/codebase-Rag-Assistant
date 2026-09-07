@@ -5,10 +5,13 @@ Combines Dense TF-IDF / Subword Embedding vectors with BM25 exact keyword scorin
 import json
 import math
 import os
+import sys
 import re
 from typing import List, Dict, Any, Tuple
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from parser import CodeChunk
 
 class VectorStore:
