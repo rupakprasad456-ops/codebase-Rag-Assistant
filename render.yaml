@@ -4,7 +4,7 @@ services:
     name: codebase-rag-backend
     env: python
     region: oregon
-    buildCommand: pip install -r backend/requirements.txt
+    buildCommand: cd frontend && npm install && npm run build && cd .. && pip install -r requirements.txt
     startCommand: python -m uvicorn app:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION
