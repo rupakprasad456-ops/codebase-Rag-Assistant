@@ -3,6 +3,7 @@ FastAPI Main Application Server for Codebase RAG Assistant
 Provides REST API endpoints for repository indexing, querying, settings, and file content viewing.
 """
 import os
+import sys
 import shutil
 import tempfile
 import zipfile
@@ -11,6 +12,9 @@ from typing import Optional, List, Dict, Any
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+
+# Ensure backend folder is in Python module search path for Render execution
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from parser import parser_engine, CodeChunk
 from vector_store import vector_db
